@@ -1,0 +1,225 @@
+.container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  //background: url(../../../assets/background.jpg) no-repeat center fixed;
+  //-webkit-background-size: cover; /* pour anciens Chrome et Safari */
+  //background-size: cover; /* version standardisée */
+
+  //.title {
+  //  color: white;
+  //  margin:0;
+  //  padding:50px 20px;
+  //}
+
+}
+
+
+.example-container {
+  //display: flex;
+  //flex-direction: column;
+}
+
+mat-form-field {
+  width : 100%;
+}
+
+.example-container > * {
+  //width: 100%;
+}
+
+.get-started {
+  border-color: #006df0;
+  font-size: 50px;
+  /* border: 1px solid #006df0; */
+  padding: 1%;
+  border-radius: 100px;
+  color: #006df0;
+  background: transparent;
+  outline: none;
+}
+
+.counter {
+  border: 1px solid #006df0;
+  font-size: 40px;
+  width: fit-content;
+  padding: 0px 20px;
+  text-align: center;
+  border-radius: 20px;
+  color: #006df0;
+  margin: 2%;
+}
+
+.next-button {
+  background: #006df0;
+  color: white;
+  padding: 5px 25px 5px 24px;
+  border: none;
+  right: 0;
+  /* float: right; */
+  position: absolute;
+  /* bottom: 0; */
+  margin: 30px 40px 0px 0px;
+  cursor: pointer;
+}
+
+.disabled-next-button {
+  background: #94b9e6;
+  cursor: not-allowed !important;
+}
+
+.hint {
+  text-align: center;
+  border: 3px solid #006df0;
+  font-size: 50px;
+  /* border: 1px solid #006df0; */
+  //padding: 2%;
+  border-radius: 15px;
+  color: #006df0;
+  //background: transparent;
+  //outline: none;
+}
+
+.hint > div {
+  font-size: 39px;
+  margin-left: 10px;
+  display: inline-block;
+}
+
+.hint > img {
+  width: 40px;
+  display: inline-block;
+}
+
+.show-video {
+  height: 100%;
+  width: 100%;
+  top: 0;
+  position: absolute;
+  padding: 2%;
+  text-align: center;
+  background: #00000096;
+}
+.nextBtnMail{
+  margin: 200px 40px 0 0;
+}
+.previousBtnMail{
+  top: 449px;
+  left: 53px;
+  position: absolute;
+  color: #006df0;
+  background-color: white;
+  border: 1px solid #006df0;
+  border-radius: 3px;
+}
+
+.bipscreen{
+  margin-top: 299px;
+}
+.email-code {
+
+  border: none;
+  width: 4.5ch;
+  background:
+    repeating-linear-gradient(90deg,
+      #006df0 0,
+      #006df0 1ch,
+      transparent 0,
+      transparent 1.5ch)
+    0 100%/100% 2px no-repeat;
+  color: #006df0;
+  font: 5ch consolas, monospace;
+  letter-spacing: .5ch;
+}
+.email-code:focus {
+  outline: none;
+  color: #006df0;
+}
+
+.countryCode{
+  font-size: 30px;
+  margin-left: -20px;
+  margin-right: 13px;
+}
+.cloudio-code {
+
+  border: none;
+  width: 10.5ch;
+  background:
+    repeating-linear-gradient(90deg,
+      #006df0 0,
+      #006df0 1ch,
+      transparent 0,
+      transparent 1.5ch)
+    0 100%/100% 2px no-repeat;
+  color: #006df0;
+  font: 5ch consolas, monospace;
+  letter-spacing: .5ch;
+}
+.cloudio-code:focus {
+  outline: none;
+  color: #006df0;
+}
+
+.number-code {
+
+  border: none;
+  width: 15ch;
+  background:
+    repeating-linear-gradient(90deg,
+      #006df0 0,
+      #006df0 1ch,
+      transparent 0,
+      transparent 1.5ch)
+    0 100%/100% 2px no-repeat;
+  color: #006df0;
+  font: 4ch consolas, monospace;
+  letter-spacing: .5ch;
+}
+.number-code:focus {
+  outline: none;
+  color: #006df0;
+}
+
+.email-code-div {
+  border: 3px solid #006df0;
+  color: #006df0;
+  padding: 10px 10px 10px 20px;
+  margin: 0 auto;
+  border-radius: 10px;
+  width: fit-content;
+
+}
+
+.card-stripe {
+  height: 15px;
+  width: 100%;
+  background: #006df0;
+  margin-bottom: 20px;
+}
+
+.success {
+  border: 3px solid #006df0;
+  width: 340px;
+  font-size: 40px;
+  padding: 40px;
+  margin: 0 auto;
+  color: #006df0;
+  border-radius: 100%;
+  margin-top: 120px;
+  height: 340px;
+}
+
+.failure {
+  border: 3px solid #006df0;
+  width: 500px;
+  font-size: 40px;
+  padding: 40px;
+  margin: 0 auto;
+  color: #006df0;
+  border-radius: 100%;
+  margin-top: 120px;
+  height: 500px;
+}

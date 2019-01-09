@@ -1,0 +1,745 @@
+<mat-grid-list cols="1" rowHeight="100%" *ngIf="!started && !errorScreen">
+  <mat-grid-tile>
+    <button class="get-started" (click)="start()">Get Started</button>
+  </mat-grid-tile>
+</mat-grid-list>
+<div class="row" style="margin: 0px;" [hidden]="!started || successScreen">
+  <div class="col-md-12">
+    <div class="counter">
+      <countdown #cd [config]="{leftTime: 3600}"
+                 (start)="timerStart()"
+                 (finished)="timerFinished()"
+                 (notify)="timerNotify($event)"
+      >$!m!:$!s!
+      </countdown>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="started">
+  <div class="example-container" *ngIf="memberDiv">
+    <form class="form" name="biodataForm" [formGroup]="memberForm">
+      <div class="row" style="margin: 0px;">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-4">
+          <mat-form-field hintLabel="">
+            <input matInput maxlength="" placeholder="Team member 1" [formControl]="member1"
+                   (change)="roleSelected($event)">
+            <mat-error *ngIf="member1.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field hintLabel="">
+            <input matInput maxlength="" placeholder="Team member 2" [formControl]="member2">
+            <mat-error *ngIf="member2.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field hintLabel="">
+            <input matInput maxlength="" placeholder="Team member 3" [formControl]="member3">
+            <mat-error *ngIf="member3.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field hintLabel="">
+            <input matInput maxlength="" placeholder="Team member 4" [formControl]="member4">
+            <mat-error *ngIf="member4.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field hintLabel="">
+            <input matInput maxlength="" placeholder="Team member 5" [formControl]="member5">
+            <mat-error *ngIf="member5.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+
+        </div>
+        <div class="col-md-4">
+          <mat-form-field>
+            <mat-select placeholder="Role" [formControl]="t1Role" (selectionChange)="roleSelected($event)">
+              <mat-option
+                *ngIf="t2Role.value != 'Front Line Officer' && t3Role.value != 'Front Line Officer' && t4Role.value != 'Front Line Officer' && t5Role.value != 'Front Line Officer'"
+                value="Front Line Officer">Front Line Officer
+              </mat-option>
+              <mat-option
+                *ngIf="t2Role.value != 'Forensic Examiner 1' && t3Role.value != 'Forensic Examiner 1' && t4Role.value != 'Forensic Examiner 1' && t5Role.value != 'Forensic Examiner 1'"
+                value="Forensic Examiner 1">Forensic Examiner 1
+              </mat-option>
+              <mat-option
+                *ngIf="t2Role.value != 'Forensic Examiner 2' && t3Role.value != 'Forensic Examiner 2' && t4Role.value != 'Forensic Examiner 2' && t5Role.value != 'Forensic Examiner 2'"
+                value="Forensic Examiner 2">Forensic Examiner 2
+              </mat-option>
+              <mat-option
+                *ngIf="t2Role.value != 'Investigator 1' && t3Role.value != 'Investigator 1' && t4Role.value != 'Investigator 1' && t5Role.value != 'Investigator 1'"
+                value="Investigator 1">Investigator 1
+              </mat-option>
+              <mat-option
+                *ngIf="t2Role.value != 'Investigator 2' && t3Role.value != 'Investigator 2' && t4Role.value != 'Investigator 2' && t5Role.value != 'Investigator 2'"
+                value="Investigator 2">Investigator 2
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="t1Role.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-select placeholder="Role" [formControl]="t2Role">
+              <mat-option
+                *ngIf="t1Role.value != 'Front Line Officer' && t3Role.value != 'Front Line Officer' && t4Role.value != 'Front Line Officer' && t5Role.value != 'Front Line Officer'"
+                value="Front Line Officer">Front Line Officer
+              </mat-option>
+              <mat-option
+                *ngIf="t1Role.value != 'Forensic Examiner 1' && t3Role.value != 'Forensic Examiner 1' && t4Role.value != 'Forensic Examiner 1' && t5Role.value != 'Forensic Examiner 1'"
+                value="Forensic Examiner 1">Forensic Examiner 1
+              </mat-option>
+              <mat-option
+                *ngIf="t1Role.value != 'Forensic Examiner 2' && t3Role.value != 'Forensic Examiner 2' && t4Role.value != 'Forensic Examiner 2' && t5Role.value != 'Forensic Examiner 2'"
+                value="Forensic Examiner 2">Forensic Examiner 2
+              </mat-option>
+              <mat-option
+                *ngIf="t1Role.value != 'Investigator 1' && t3Role.value != 'Investigator 1' && t4Role.value != 'Investigator 1' && t5Role.value != 'Investigator 1'"
+                value="Investigator 1">Investigator 1
+              </mat-option>
+              <mat-option
+                *ngIf="t1Role.value != 'Investigator 2' && t3Role.value != 'Investigator 2' && t4Role.value != 'Investigator 2' && t5Role.value != 'Investigator 2'"
+                value="Investigator 2">Investigator 2
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="t2Role.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-select placeholder="Role" [formControl]="t3Role">
+              <mat-option
+                *ngIf="t1Role.value != 'Front Line Officer' && t2Role.value != 'Front Line Officer' && t4Role.value != 'Front Line Officer' && t5Role.value != 'Front Line Officer'"
+                value="Front Line Officer">Front Line Officer
+              </mat-option>
+              <mat-option
+                *ngIf="t1Role.value != 'Forensic Examiner 1' && t2Role.value != 'Forensic Examiner 1' && t4Role.value != 'Forensic Examiner 1' && t5Role.value != 'Forensic Examiner 1'"
+                value="Forensic Examiner 1">Forensic Examiner 1
+              </mat-option>
+              <mat-option
+                *ngIf="t1Role.value != 'Forensic Examiner 2' && t2Role.value != 'Forensic Examiner 2' && t4Role.value != 'Forensic Examiner 2' && t5Role.value != 'Forensic Examiner 2'"
+                value="Forensic Examiner 2">Forensic Examiner 2
+              </mat-option>
+              <mat-option
+                *ngIf="t1Role.value != 'Investigator 1' && t2Role.value != 'Investigator 1' && t4Role.value != 'Investigator 1' && t5Role.value != 'Investigator 1'"
+                value="Investigator 1">Investigator 1
+              </mat-option>
+              <mat-option
+                *ngIf="t1Role.value != 'Investigator 2' && t2Role.value != 'Investigator 2' && t4Role.value != 'Investigator 2' && t5Role.value != 'Investigator 2'"
+                value="Investigator 2">Investigator 2
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="t3Role.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-select placeholder="Role" [formControl]="t4Role">
+              <mat-option
+                *ngIf="t1Role.value != 'Front Line Officer' && t2Role.value != 'Front Line Officer' && t3Role.value != 'Front Line Officer' && t5Role.value != 'Front Line Officer'"
+                value="Front Line Officer">Front Line Officer
+              </mat-option>
+              <mat-option
+                *ngIf="t1Role.value != 'Forensic Examiner 1' && t2Role.value != 'Forensic Examiner 1' && t3Role.value != 'Forensic Examiner 1' && t5Role.value != 'Forensic Examiner 1'"
+                value="Forensic Examiner 1">Forensic Examiner 1
+              </mat-option>
+              <mat-option
+                *ngIf="t1Role.value != 'Forensic Examiner 2' && t2Role.value != 'Forensic Examiner 2' && t3Role.value != 'Forensic Examiner 2' && t5Role.value != 'Forensic Examiner 2'"
+                value="Forensic Examiner 2">Forensic Examiner 2
+              </mat-option>
+              <mat-option
+                *ngIf="t1Role.value != 'Investigator 1' && t2Role.value != 'Investigator 1' && t3Role.value != 'Investigator 1' && t5Role.value != 'Investigator 1'"
+                value="Investigator 1">Investigator 1
+              </mat-option>
+              <mat-option
+                *ngIf="t1Role.value != 'Investigator 2' && t2Role.value != 'Investigator 2' && t3Role.value != 'Investigator 2' && t5Role.value != 'Investigator 2'"
+                value="Investigator 2">Investigator 2
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="t4Role.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-select placeholder="Role" [formControl]="t5Role">
+              <mat-option
+                *ngIf="t1Role.value != 'Front Line Officer' && t2Role.value != 'Front Line Officer' && t3Role.value != 'Front Line Officer' && t4Role.value != 'Front Line Officer'"
+                value="Front Line Officer">Front Line Officer
+              </mat-option>
+              <mat-option
+                *ngIf="t1Role.value != 'Forensic Examiner 1' && t2Role.value != 'Forensic Examiner 1' && t3Role.value != 'Forensic Examiner 1' && t4Role.value != 'Forensic Examiner 1'"
+                value="Forensic Examiner 1">Forensic Examiner 1
+              </mat-option>
+              <mat-option
+                *ngIf="t1Role.value != 'Forensic Examiner 2' && t2Role.value != 'Forensic Examiner 2' && t3Role.value != 'Forensic Examiner 2' && t4Role.value != 'Forensic Examiner 2'"
+                value="Forensic Examiner 2">Forensic Examiner 2
+              </mat-option>
+              <mat-option
+                *ngIf="t1Role.value != 'Investigator 1' && t2Role.value != 'Investigator 1' && t3Role.value != 'Investigator 1' && t4Role.value != 'Investigator 1'"
+                value="Investigator 1">Investigator 1
+              </mat-option>
+              <mat-option
+                *ngIf="t1Role.value != 'Investigator 2' && t2Role.value != 'Investigator 2' && t3Role.value != 'Investigator 2' && t4Role.value != 'Investigator 2'"
+                value="Investigator 2">Investigator 2
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="t5Role.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-2">
+
+        </div>
+      </div>
+    </form>
+
+    <div>
+      <button class="next-button" [class.disabled-next-button]="memberForm.invalid" [disabled]="memberForm.invalid"
+              (click)="membersSelected()">Next
+      </button>
+    </div>
+  </div>
+
+  <div class="example-container" *ngIf="afterMEmberDiv">
+    <div class="row" style="margin: 0px;">
+      <div class="col-md-2">
+      </div>
+      <div class="col-md-8">
+        Please send the <b>front line officer </b> <b>({{ t1Role.value === 'Front Line Officer' ? member1.value : (t2Role.value === 'Front Line Officer' ?
+        member2.value : (t3Role.value === 'Front Line Officer' ? member3.value : (t4Role.value === 'Front Line Officer'
+        ? member4.value : (t5Role.value === 'Front Line Officer' ? member5.value : 'Front Line Officer')))) }})</b> to get UFED on
+        Android from one of the judges.
+        <br><br>
+        Once you have the UFED on Android please perform evidence collection of the picture one of the team member just
+        took.
+        <br><br>
+        Transfer the picture to laptop and send the picture using the button below:
+      </div>
+      <div class="col-md-2">
+
+      </div>
+    </div>
+    <div class="row" style="margin: 0px; margin-top: 8%;">
+      <div class="col-md-2"></div>
+      <div class="col-md-4" *ngIf="showHint" (click)="showhint()" style="cursor: pointer;">
+        <div class="hint">
+          <img src="assets/images/help.png">
+          <div>HINT</div>
+        </div>
+      </div>
+
+      <div class="col-md-4" *ngIf="!showHint" style="cursor: pointer;" (click)="showvideo()">
+        <div class="hint">
+          <img src="assets/images/camera.png">
+          <div>How to use UoA</div>
+        </div>
+      </div>
+
+      <div class="col-md-4" style="cursor: pointer;" (click)="sendEmail()">
+        <div class="hint">
+          <img src="assets/images/email.png">
+          <div>Send Email</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <button class="next-button" (click)="afterEmail()">Next
+      </button>
+    </div>
+  </div>
+
+  <div class="example-container" *ngIf="emailedCode">
+    <div class="row" style="margin: 0px;">
+      <div class="col-md-4">
+      </div>
+      <div class="col-md-4" style="margin-bottom: 20px; text-align: center;">
+        Look in your Mail Inbox……What is the code?
+      </div>
+      <div class="col-md-4">
+      </div>
+    </div>
+
+    <div class="row" style="margin: 0px;">
+      <div class="col-md-4">
+      </div>
+      <div class="col-md-4">
+        <form class="form" name="biodataForm" [formGroup]="codeForm">
+          <div class="email-code-div">
+            <input maxlength="3" placeholder="" class="email-code" [formControl]="emailCode"
+                   (change)="roleSelected($event)">
+          </div>
+        </form>
+      </div>
+      <div class="col-md-4">
+      </div>
+    </div>
+    <div>
+      <button class= "next-button previousBtnMail"(click)="goBackMailScreen()">Previous
+      </button>
+    </div>
+    <div>
+      <button class="next-button nextBtnMail" [class.disabled-next-button]="codeForm.invalid" [disabled]="codeForm.invalid"
+              (click)="verifyEmailCode()">Next
+      </button>
+    </div>
+  </div>
+
+
+  <div class="example-container" *ngIf="emailCodeVerified">
+    <div class="row" style="margin: 0px;">
+      <div class="col-md-4">
+      </div>
+      <div class="col-md-4" style="margin-bottom: 20px; text-align: center;">
+        Use the code to unlock the box on the table
+      </div>
+      <div class="col-md-4">
+      </div>
+    </div>
+
+    <div>
+      <button class="next-button bipscreen" (click)="BIPScreen()">Next
+      </button>
+    </div>
+  </div>
+
+
+  <div class="example-container" *ngIf="bipScreen">
+    <div class="row" style="margin: 0px;">
+      <div class="col-md-3">
+      </div>
+      <div class="col-md-6" style="margin-bottom: 20px; text-align: center">
+        You now have access to Dan's phone please ask <b>forensics examiner 1 </b> <b>({{ t1Role.value === 'Forensic Examiner 1' ? member1.value :
+        (t2Role.value === 'Forensic Examiner 1' ? member2.value : (t3Role.value === 'Forensic Examiner 1' ?
+        member3.value : (t4Role.value === 'Forensic Examiner 1' ? member4.value
+        : (t5Role.value === 'Forensic Examiner 1' ? member5.value : 'Forensic Examiner 1')))) }})</b> to perform
+        selective extraction of Dan's phone using the UFED installed on this Machine.
+        <br><br>
+        Then use the Physical Analyzer to reveal his latest WhatsApp conversations.
+      </div>
+      <div class="col-md-3">
+      </div>
+    </div>
+
+    <div class="row" style="margin: 0px;">
+      <div class="col-md-2">
+      </div>
+      <div class="col-md-8">
+        <form class="form" name="biodataForm" [formGroup]="bipForm">
+          <div class="row">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-4">
+              <div class="email-code-div">
+                Where can the rest of the conversation found?
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="email-code-div" style="width: 100%; text-align: center">
+                <input maxlength="3" placeholder="" class="email-code" [formControl]="bipCode"
+                       (change)="roleSelected($event)">
+              </div>
+            </div>
+            <div class="col-md-2">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-2">
+      </div>
+    </div>
+
+    <div class="row" style="margin: 0px; margin-top: 8%;">
+      <div class="col-md-2"></div>
+      <div class="col-md-4" *ngIf="showHintSelectiveExctraction" (click)="showhintSelectiveExctraction()"
+           style="cursor: pointer;">
+        <div class="hint">
+          <img src="assets/images/help.png">
+          <div>HINT</div>
+        </div>
+      </div>
+
+      <div class="col-md-4" *ngIf="!showHintSelectiveExctraction" style="cursor: pointer;"
+           (click)="showvideoSelectiveExctraction()">
+        <div class="hint">
+          <img src="assets/images/camera.png">
+          <div style="font-size: 20px;">How to perform Selective Extraction</div>
+        </div>
+      </div>
+    </div>
+
+
+    <div>
+      <button class="next-button" [class.disabled-next-button]="bipForm.invalid" [disabled]="bipForm.invalid"
+              (click)="bipCodeVerify()">Next
+      </button>
+    </div>
+  </div>
+
+
+  <div class="example-container" *ngIf="cloudioScreen">
+    <div class="row" style="margin: 0px;">
+      <div class="col-md-3">
+      </div>
+      <div class="col-md-6" style="margin-bottom: 20px; text-align: center">
+        Please ask <b> forensic examiner 2 ({{ t1Role.value === 'Forensic Examiner 2' ? member1.value :
+        (t2Role.value === 'Forensic Examiner 2' ? member2.value : (t3Role.value === 'Forensic Examiner 2' ?
+        member3.value : (t4Role.value === 'Forensic Examiner 2' ? member4.value
+        : (t5Role.value === 'Forensic Examiner 2' ? member5.value : 'Forensic Examiner 2')))) }})</b> to use
+        <span (click)="openDirectory()" style="color: #006df0; cursor: pointer;"><u>Dan's full extraction</u></span> and
+        use virtual analyzer to look
+        into the signal conversation.
+      </div>
+      <div class="col-md-3">
+      </div>
+    </div>
+
+    <div class="row" style="margin: 0px;">
+      <div class="col-md-2">
+      </div>
+      <div class="col-md-8">
+        <form class="form" name="biodataForm" [formGroup]="cloudioForm">
+          <div class="row">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-3">
+              <div class="email-code-div">
+                Who may be a potential suspect?
+              </div>
+            </div>
+            <div class="col-md-5">
+              <div class="email-code-div" style="width: 100%; text-align: center">
+                <input maxlength="7" placeholder="" class="cloudio-code" [formControl]="cloudioCode"
+                       (change)="roleSelected($event)">
+              </div>
+            </div>
+            <div class="col-md-2">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-2">
+      </div>
+    </div>
+
+    <div class="row" style="margin: 0px; margin-top: 8%;">
+      <div class="col-md-2"></div>
+      <div class="col-md-4" *ngIf="showHintVirtual" (click)="showhintVirtual()" style="cursor: pointer;">
+        <div class="hint">
+          <img src="assets/images/help.png">
+          <div>HINT</div>
+        </div>
+      </div>
+
+      <div class="col-md-4" *ngIf="!showHintVirtual" style="cursor: pointer;" (click)="showvideoVirtual()">
+        <div class="hint">
+          <img src="assets/images/camera.png">
+          <div style="font-size: 26px;">How to use Virtual Analyzer</div>
+        </div>
+      </div>
+    </div>
+
+
+    <div>
+      <button class="next-button" [class.disabled-next-button]="cloudioForm.invalid" [disabled]="cloudioForm.invalid"
+              (click)="cloudioCodeVerify()">Next
+      </button>
+    </div>
+  </div>
+
+
+  <div class="example-container" *ngIf="numberScreen">
+    <div class="row" style="margin: 0px;">
+      <div class="col-md-3">
+      </div>
+      <div class="col-md-6" style="margin-bottom: 20px; text-align: center">
+        <b>Investigator 1  ({{ t1Role.value === 'Investigator 1' ? member1.value :
+          (t2Role.value === 'Investigator 1' ? member2.value : (t3Role.value === 'Investigator 1' ?
+          member3.value : (t4Role.value === 'Investigator 1' ? member4.value
+          : (t5Role.value === 'Investigator 1' ? member5.value : 'Investigator 1')))) }})</b> You now need to find more
+        information about the suspect.
+      </div>
+      <div class="col-md-3">
+      </div>
+    </div>
+
+    <div class="row" style="margin: 0px;">
+      <div class="col-md-2">
+      </div>
+      <div class="col-md-8">
+        <form class="form" name="biodataForm" [formGroup]="numberForm">
+          <div class="row">
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-3">
+              <div class="email-code-div">
+                What is the suspect’s phone number?
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="email-code-div" style="width: 100%; text-align: center">
+                <span class="countryCode">+972</span> <input maxlength="10" placeholder="" class="number-code" [formControl]="numberCode">
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-2">
+      </div>
+    </div>
+
+    <div class="row" style="margin: 0px; margin-top: 8%;">
+      <div class="col-md-2"></div>
+      <div class="col-md-4" *ngIf="showHintCloudCollection" (click)="showhintCloudCollection()"
+           style="cursor: pointer;">
+        <div class="hint">
+          <img src="assets/images/help.png">
+          <div>HINT</div>
+        </div>
+      </div>
+
+      <div class="col-md-4" *ngIf="!showHintCloudCollection" style="cursor: pointer;"
+           (click)="showvideoCloudCollection()">
+        <div class="hint">
+          <img src="assets/images/camera.png">
+          <div style="font-size: 20px;">How to use public cloud collection</div>
+        </div>
+      </div>
+    </div>
+
+
+    <div>
+      <button class="next-button" [class.disabled-next-button]="numberForm.invalid" [disabled]="numberForm.invalid"
+              (click)="numberCodeVerify()">Next
+      </button>
+    </div>
+  </div>
+
+
+  <div class="example-container" *ngIf="buisnessCard">
+    <div class="row" style="margin: 0px;">
+      <div class="col-md-3">
+      </div>
+      <div class="col-md-6" style="margin-bottom: 20px; text-align: center">
+        Please approach the “Business Card Center“ to find a connection
+      </div>
+      <div class="col-md-3">
+      </div>
+    </div>
+
+    <div class="row" style="margin: 0px;">
+      <div class="col-md-2">
+      </div>
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-2">
+          </div>
+          <div class="col-md-8">
+            <div class="email-code-div">
+              <div class="row">
+                <div class="col-md-6">
+                  <img src="assets/images/member.png" style="width: 100%;">
+                </div>
+                <div class="col-md-6" style="padding: 50px;">
+                  <div class="card-stripe" style="margin-top: 15px;"></div>
+                  <div class="card-stripe"></div>
+                  <div class="card-stripe"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+      </div>
+    </div>
+
+
+    <div>
+      <button class="next-button" (click)="cardVerify()">Next
+      </button>
+    </div>
+  </div>
+
+  <div class="example-container" *ngIf="ronScreen">
+    <div class="row" style="margin: 0px;">
+      <div class="col-md-3">
+      </div>
+      <div class="col-md-6" style="margin-bottom: 20px; text-align: center">
+        Follow the instruction on the SD card and use Analytics to detect who is the assassin.
+      </div>
+      <div class="col-md-3">
+      </div>
+    </div>
+
+    <div class="row" style="margin: 0px;">
+      <div class="col-md-2">
+      </div>
+      <div class="col-md-8">
+        <form class="form" name="biodataForm" [formGroup]="ronForm">
+          <div class="row">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-4">
+              <div class="email-code-div">
+                Who is the assassin?
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="email-code-div" style="width: 100%; text-align: center">
+                <input maxlength="3" placeholder="" class="email-code" [formControl]="ronCode">
+              </div>
+            </div>
+            <div class="col-md-2">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-2">
+      </div>
+    </div>
+
+    <div class="row" style="margin: 0px; margin-top: 8%;">
+      <div class="col-md-2"></div>
+      <div class="col-md-4" *ngIf="showHintRon" (click)="showhintRon()"
+           style="cursor: pointer;">
+        <div class="hint">
+          <img src="assets/images/help.png">
+          <div>HINT</div>
+        </div>
+      </div>
+
+      <div class="col-md-4" *ngIf="!showHintRon" style="cursor: pointer;"
+           (click)="showvideoUpload()">
+        <div class="hint">
+          <img src="assets/images/camera.png">
+          <div style="font-size: 22px;">How to use image search</div>
+        </div>
+      </div>
+
+      <div class="col-md-4" *ngIf="!showHintRon" style="cursor: pointer;"
+           (click)="showvideoFaceTool()">
+        <div class="hint">
+          <img src="assets/images/camera.png">
+          <div style="font-size: 20px;">How to use face tool</div>
+        </div>
+      </div>
+    </div>
+
+
+    <div>
+      <button class="next-button" [class.disabled-next-button]="ronForm.invalid" [disabled]="ronForm.invalid"
+              (click)="ronCodeVerify()">Next
+      </button>
+    </div>
+  </div>
+
+
+  <div class="example-container" *ngIf="successScreen">
+    <div class="row" style="margin: 0px;">
+      <div class="col-md-4">
+      </div>
+      <div class="col-md-4" style="margin-bottom: 20px; text-align: center;">
+        <div class="success">
+          <img style="width: 100px; " src="assets/images/done.png">
+          <div style="width: fit-content">
+            You solved the case!!
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+<div class="example-container" *ngIf="errorScreen">
+  <div class="row" style="margin: 0px;">
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4" style="margin-bottom: 20px; text-align: center;">
+      <div class="failure" style="width: 500px; height: 500px; padding: 55px; font-size: 40px">
+        <img style="width: 100px;" src="assets/images/cross.png">
+        <div style="width: fit-content">You failed to find Dan's killer, he will haunt you for all the eternity!</div>
+      </div>
+    </div>
+    <div class="col-md-4">
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showVideo" class="show-video">
+  <div (click)="hidevideo()">
+    <mat-icon style="color: white; float: right; cursor: pointer;">close</mat-icon>
+  </div>
+  <div>
+    <video height="500" controls>
+      <source
+        src="assets/videos/uoa.mp4"
+        type="video/mp4">
+    </video>
+  </div>
+</div>
+
+
+<div *ngIf="showVideoVirtual" class="show-video">
+  <div (click)="hidevideoVirtual()">
+    <mat-icon style="color: white; float: right; cursor: pointer;">close</mat-icon>
+  </div>
+  <div>
+    <video height="500" controls>
+      <source
+        src="assets/videos/virtual-analyzer.mp4"
+        type="video/mp4">
+    </video>
+  </div>
+</div>
+
+<div *ngIf="showVideoSelectiveExctraction" class="show-video">
+  <div (click)="hidevideoSelectiveExctraction()">
+    <mat-icon style="color: white; float: right; cursor: pointer;">close</mat-icon>
+  </div>
+  <div>
+    <video height="500" controls>
+      <source
+        src=""
+        type="video/mp4">
+    </video>
+  </div>
+</div>
+
+<div *ngIf="showVideoCloudCollection" class="show-video">
+  <div (click)="hidevideoCloudCollection()">
+    <mat-icon style="color: white; float: right; cursor: pointer;">close</mat-icon>
+  </div>
+  <div>
+    <video height="500" controls>
+      <source
+        src="assets/videos/public-cloud.mp4"
+        type="video/mp4">
+    </video>
+  </div>
+</div>
+
+<div *ngIf="showVideoUpload" class="show-video">
+  <div (click)="hidevideoUpload()">
+    <mat-icon style="color: white; float: right; cursor: pointer;">close</mat-icon>
+  </div>
+  <div>
+    <video height="500" controls>
+      <source
+        src="assets/videos/image-search.mp4"
+        type="video/mp4">
+    </video>
+  </div>
+</div>
+
+<div *ngIf="showVideoFaceTool" class="show-video">
+  <div (click)="hidevideoFaceTool()">
+    <mat-icon style="color: white; float: right; cursor: pointer;">close</mat-icon>
+  </div>
+  <div>
+    <video height="500" controls>
+      <source
+        src="assets/videos/face-tool.mp4"
+        type="video/mp4">
+    </video>
+  </div>
+</div>
